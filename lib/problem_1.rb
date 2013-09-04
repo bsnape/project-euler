@@ -9,14 +9,14 @@ The sum of these multiples is 23.
 Find the sum of all the multiples of 3 or 5 below 1000.
 =end
 
-
-  def self.sum_of_two_multiples (number_limit, first_multiple, second_multiple)
+  def sum_of_two_multiples(number, first_multiple, second_multiple)
     sum = 0
-    (1..number_limit).each do |n|
-      sum += n if n % first_multiple == 0 || n % second_multiple == 0
-    end
-  sum
+    (1..number).each { |n| sum += n if multiple_of?(n, first_multiple) || multiple_of?(n, second_multiple) }
+    sum
   end
 
-  puts self.sum_of_two_multiples 999, 3, 5
+  def multiple_of?(number, multiple)
+    number % multiple == 0
+  end
+
 end
