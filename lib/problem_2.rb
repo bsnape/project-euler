@@ -12,22 +12,18 @@ By considering the terms in the Fibonacci sequence whose values do not exceed fo
  find the sum of the even-valued terms.
 =end
 
-  def self.fibonacci_sequence_generator (number)
-    sequence = [1,2]
-    (1..number).each {
-      break unless sequence[-1] + sequence[-2] < number
-      sequence << sequence[-1] + sequence[-2]}
+  def generate_fibonacci_sequence(max_value)
+    sequence = [1, 2]
+    (1..Float::INFINITY).each do
+      next_value = sequence.last(2).reduce(:+)
+      break if next_value > max_value
+      sequence << next_value
+    end
     sequence
   end
 
-  def self.sum_of_even_fibonacci_sequence_values (sequence)
-    sum = 0
-    sequence.to_a.each { |n| sum += n if n % 2 == 0 }
-    sum
+  def sum_of_even_values(array)
+    array.select { |n| n.even? }.reduce(:+)
   end
-
-  fibonacci_sequence = self.fibonacci_sequence_generator 4000000
-  sum = self.sum_of_even_fibonacci_sequence_values fibonacci_sequence
-  puts "sum is: #{sum}"
 
 end
