@@ -7,22 +7,23 @@ class Problem5
   What is the smallest positive number that is evenly divisible by all of the numbers from 1 to 20?
 =end
 
-  def self.divisible? (number, factor)
-    return true if number % factor == 0
+  def initialize(divisors)
+    @divisors = divisors
   end
 
-  number = 0
-  count = 0
+  def divisible?(number, factor)
+    number % factor == 0
+  end
 
-  until count == 10
-    count = 0
-    number += 1
-    (11..20).each do |n|
-      break unless self.divisible? number, n
-      count += 1
+  def find_smallest_divisible_number
+    (1..Float::INFINITY).each do |number|
+      count = 0
+      @divisors.each do |divisor|
+        break unless divisible?(number, divisor)
+        count += 1
+      end
+      return number if count == @divisors.size
     end
   end
-
-  puts number, count
 
 end
