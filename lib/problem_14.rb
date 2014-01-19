@@ -21,24 +21,22 @@ NOTE: Once the chain starts the terms are allowed to go above one million.
 
 =end
 
-  @longest_chain_value = 0
-  @longest_chain_count = 0
-
-  def self.even? (number)
-    true if number % 2 == 0
+  def even?(number)
+    number % 2 == 0
   end
 
-  def self.even_rule (number)
+  def even_rule(number)
     number / 2
   end
 
-  def self.odd_rule (number)
+  def odd_rule(number)
     (number * 3) + 1
   end
 
-  (13..999999).to_a.each do |n|
-    initial_chain_value = n
-    chain_count = 0
+  def calculate_chain_length(starting_number)
+    n = starting_number
+    chain_count = 1
+
     until (n == 1)
       if even? n
         n = even_rule n
@@ -48,12 +46,7 @@ NOTE: Once the chain starts the terms are allowed to go above one million.
       chain_count += 1
     end
 
-    if chain_count > @longest_chain_count
-      @longest_chain_value = initial_chain_value
-      @longest_chain_count = chain_count
-    end
+    chain_count
   end
-
-  puts "the starting value with the longest chain is: #{@longest_chain_value} with count: #{@longest_chain_count}"
 
 end
