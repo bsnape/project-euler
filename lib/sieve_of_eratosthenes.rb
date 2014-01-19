@@ -2,16 +2,16 @@ class SieveOfEratosthenes
 
   attr_reader :values, :p
 
-  def initialize(number)
-    range = (2..number).to_a
-    @values = Hash[range.zip(Array.new(range.size, false))]
+  def initialize(max_value)
+    @max_value = max_value
+    @values = (2..max_value).to_a
     @p = 2
   end
 
   def sieve
-    @values.each do |k, v|
-      next if k <= @p
-      @values[k] = true if k % @p == 0
+    @values.each do |value|
+      next if value <= @p
+      @values.delete_if { |v| v != @p && v % @p == 0 }
     end
     increment_p
     @values
@@ -22,11 +22,7 @@ class SieveOfEratosthenes
   end
 
   def sieve_to_solution
-    sieve until @values.max[0] == @p
-  end
-
-  def primes
-    @values.select { |k, v| !v }.keys
+    sieve until @p == (@max_value / 2).floor
   end
 
 end
