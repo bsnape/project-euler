@@ -1,4 +1,4 @@
-class SumOfDigits
+class Problem16
 
 =begin
   Problem 16
@@ -8,13 +8,10 @@ class SumOfDigits
   What is the sum of the digits of the number 2^1000?
 =end
 
-  def self.sum_of_digits (number)
+  def sum_of_digits(number)
     sum = 0
-    (number).to_s.each_byte {|b| sum += b.chr.to_i}
+    (number).to_s.each_byte { |b| sum += b.chr.to_i }
     sum
   end
-
-  sum = self.sum_of_digits 2**1000
-  puts "the sum is: #{sum}"
 
 end
